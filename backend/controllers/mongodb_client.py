@@ -10,9 +10,7 @@ class Database:
         client = pymongo.MongoClient(
             os.environ.get("MONGODB_URI"), uuidRepresentation="standard"
         )
-        Database.DATABASE = client[
-            "Testing" if os.environ.get("ENV") == "dev" else "Production"
-        ]
+        Database.DATABASE = client["production"]
 
     @staticmethod
     def insert_one(collection, data):

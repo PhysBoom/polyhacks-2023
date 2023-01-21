@@ -1,0 +1,13 @@
+{
+    "type": "service_account",
+    "project_id": "polyhacks-2023",
+    "private_key_id": "d71f67ec9e24dcc85482f2d295a61b3ef6e937b4",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDfFxwW6acTUHLI\nKLABph8qy4eAVq8aBBpwdyNUYOZlTWVmd/jKAzAcjBm2Xv+jcG5gZYKyux65n/cs\nhqUYPAsyL/DCD+4WUZuWfbMEQbJ9MPI3QIQ1C84RSeUXN0ptRvlJ7dBfFM7DcaZH\np3LJ8O5cS1QbRJrePT6Ohjj3vaO/bUH2MYI0afMHzUqA6dTqdo5mlCk2pnbzLAeF\n23SRepiQjcyS3jjVJ9qzHQ/9tPAQi/nLRnHKmklZ+D5c5fJpiyTX5+ye+4XKR5oi\nwl9HmFgz+sfTU6HJJchcoyQLuP3cgb1PYluN8wgJtaiNOi4uophtXEJKvRKE8OWM\npN+wR5khAgMBAAECggEAUhjJi/8JLnjk/JbIiprNDm0e3NJJltvatPeK51LPhokQ\nX0CYLBM3QdIm5i+YiNdnrw68JbTprirZhae5Gq2B+0KcKXY+SjVW+e8hEVhx7FM2\nV7Hk1TaWa1NTvJLqz0MWmyeqjkr0egUZSXYsLnd86DcKaQx6p31HR6DKVxURLPDC\ntHQ7U+ZAiaE7g/Sd4hcPZ0OuZMsBFu0AFr53ZjYmGy1Y3S0kHBg/znxsUDkeZiMV\nTneKk5tmSpK+jxI5D4X2xLcbz8Gns9RljSzq91PSvwjpwMI5H6Yc7pVL2AoESO8t\nvSiNUqQbCpNBGXL4YOCPnUapYPFdAfKJTzOJq7LjtwKBgQDyXzLi7cmekzviiGwR\nx1mm7Adaznv0XL9i7yQEYplQ3h7s6OVPXbhan5fkqC2zklWPVghF2HtHwKCmzo87\n9gcbeAY78trBKfHubtc3+FhbAN3rmQdl/Jto6X+T+bP3SyzD/5mKYBUZC/t6/mSW\nWuQHVcfYuD5542chwx4VDwr6bwKBgQDrol0XCkaLz++7a+M2xYCies8m2qmfU9/k\nURl2o+lvIIzsaBpNg0yJWdsmhM6OH2WeuWbFvZbXizlnBFbe2n0bgKaGBMWOcD0H\nqvRsipVC7zbQwbhqH3XE1COQRLz23nw5pintBlgG9mZk8B9kwu0R4cltBVqFzs8y\nuApZ+TitbwKBgHfxBI2ofw4qbog8Wr6xmHwycbFOXakf/NZI4doJsTWDtmonFtOf\n3Yt7Tv+o+nTTBeRY/t8RsnBfsyDZN6jEp9/AFdW06OyOhVspHvhjvdXLKAdfQ3oE\n+COC6c+g0p6eZRjZdHI1+jra4yiKm9yMPiwjFzL4enJ3RqI+nLRvLU+hAoGAPjrX\nEuqnzuzPh1Pq4eAvJLoCU2SUP3vLOWUhsG+BitOx5A1qROZUJEIS2o1gb7BjChQ0\nzCxR1gLy2f4PYzOYrta/I83GzuNdetTvUGsZGGBMvb0rkvtUAvNzoPpGXXxMmn0D\nvZFbVhtk12uDHv1L1tkmdSBg083WcrKgKTrkeQkCgYEAyF0PL0AvDez7HzTFFfdL\nGKUMmtR5Kf6GbFkn+3tQ1H6K3VdZCV9O5Uci7JDlwnfVjAbYK+MKxg+SlgcM2sDq\n10LVPEDw4hDIpeZi2rtbvmM/r0NefVPsA7eS4HriMdMc3VmwYJ/0ENNrlj1r2MNP\nJzF7z9PoW05AMnG9WQTZ5p8=\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-i7rf1@polyhacks-2023.iam.gserviceaccount.com",
+    "client_id": "102199002269128446245",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-i7rf1%40polyhacks-2023.iam.gserviceaccount.com"
+  }
+  
