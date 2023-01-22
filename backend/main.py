@@ -9,10 +9,12 @@ app = Flask(__name__)
 app.register_blueprint(v1_blueprint)
 CORS(app)
 
+
 @app.before_first_request
 def initialize_app():
     load_dotenv()
     Database.initialize()
+
 
 if __name__ == "__main__":
     app.run(debug=True)

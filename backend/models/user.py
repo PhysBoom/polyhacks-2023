@@ -1,12 +1,18 @@
 from enum import Enum
 from pydantic import BaseModel, Field
 from controllers.mongodb_client import Database
-from controllers.firebase_controller import get_user_id_from_firebase_token, create_new_user, login_user
+from controllers.firebase_controller import (
+    get_user_id_from_firebase_token,
+    create_new_user,
+    login_user,
+)
+
 
 class UserTypes(Enum):
     APPLICANT = "applicant"
     EMPLOYER = "employer"
     UNVERIFIED = "unverified"
+
 
 class User(BaseModel):
     firebase_user_key: str = Field(...)
@@ -30,13 +36,21 @@ class User(BaseModel):
 
     @staticmethod
     def get_user_with_firebase_token(token):
-        return Database.find_one("users", {"firebase_user_key": get_user_id_from_firebase_token(token)})
+        return Database.find_one(
+            "users", {"firebase_user_key": get_user_id_from_firebase_token(token)}
+        )
 
     @staticmethod
     def register(email, password, name, phone_number, type: UserTypes):
         try:
-            firebase_user_key = create_new_user(email, password)['localId']
-            user = User(firebase_user_key=firebase_user_key, user_type=type, email=email, name=name, phone_number=phone_number)
+            firebase_user_key = create_new_user(email, password)["localId"]
+            user = User(
+                firebase_user_key=firebase_user_key,
+                user_type=type,
+                email=email,
+                name=name,
+                phone_number=phone_number,
+            )
             Database.insert_one("users", user.as_dict())
             return True
         except Exception as e:
@@ -47,6 +61,6 @@ class User(BaseModel):
     def login(email, password):
         try:
             login_resp = login_user(email, password)
-            return login_resp['idToken']
+            return login_resp["idToken"]
         except Exception:
             return None

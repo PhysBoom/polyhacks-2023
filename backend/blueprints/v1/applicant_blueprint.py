@@ -8,6 +8,7 @@ import os
 
 applicant_blueprint = Blueprint("applicant", __name__, url_prefix="/applicant")
 
+
 @applicant_blueprint.route("/upload-resume", methods=["POST"])
 @token_required
 def upload_resume(user):
@@ -23,7 +24,8 @@ def upload_resume(user):
     os.unlink(f.name)
     return jsonify({"message": "Resume uploaded successfully!"}), 200
 
-@applicant_blueprint.route("", methods=['GET'])
+
+@applicant_blueprint.route("", methods=["GET"])
 @token_required
 def get_applicant(user):
     """
@@ -32,7 +34,8 @@ def get_applicant(user):
     user = Applicant(**user)
     return jsonify(user.to_dict()), 200
 
-@applicant_blueprint.route("", methods=['PATCH'])
+
+@applicant_blueprint.route("", methods=["PATCH"])
 @token_required
 def update_applicant(user):
     """
@@ -42,4 +45,3 @@ def update_applicant(user):
     user = Applicant(**user)
     user.update(data)
     return jsonify({"message": "Applicant updated successfully!"}), 200
-

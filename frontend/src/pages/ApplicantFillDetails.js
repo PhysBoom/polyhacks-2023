@@ -105,13 +105,13 @@ function ApplicantFillDetails() {
                     <div className="flex flex-col space-y-4">
                         <h2>Experience</h2>
                         <small>Enter your former jobs.</small>
-                        {inputs.former_jobs.map((job, index) => <FormerJobInput inputs={job} index={index} setInputs={newInputs => setInputs({...inputs, former_jobs: inputs.former_jobs.map((job, i) => i === index ? newInputs : job)})} />)}
+                        {inputs.former_jobs.map((job, index) => <FormerJobInput key={index} inputs={job} index={index} setInputs={newInputs => setInputs({...inputs, former_jobs: inputs.former_jobs.map((job, i) => i === index ? newInputs : job)})} />)}
                         <ButtonSecondary onClick={() => setInputs({...inputs, former_jobs: [...inputs.former_jobs, {}]})}>Add Former Job</ButtonSecondary>
                     </div>
                     <div className="flex flex-col space-y-4">
                         <h2>Skills</h2>
                         <small>Enter your skills.</small>
-                        {inputs.skills.map((skill, index) => <TextInput placeholder="Skill" onChange={val => setInputs({...inputs, skills: inputs.skills.map((skill, i) => i === index ? val : skill)})} value={skill} />)}
+                        {inputs.skills.map((skill, index) => <TextInput key={index} placeholder="Skill" onChange={val => setInputs({...inputs, skills: inputs.skills.map((skill, i) => i === index ? val : skill)})} value={skill} />)}
                         <ButtonSecondary onClick={() => setInputs({...inputs, skills: [...inputs.skills, ""]})}>Add Skill</ButtonSecondary>
                     </div>
                     <ButtonSecondary onClick={updateApplicant}>{loading ? "Loading..." : "Submit"}</ButtonSecondary>
