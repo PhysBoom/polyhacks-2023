@@ -15,7 +15,7 @@ class Resume:
     university: str = Field(...)
     gpa: float = Field(...)
     grad_date: int = Field(default=-1) # UNIX timestamp to the nearest day, -1 = not graduated yet
-    skills: List[str] = Field(default_factory=list)
+    skills: Set[str] = Field(default_factory=list)
     employment_history: List[PreviousJob] = Field(default_factory=list)
 
     def parse_from_pdf(self):
@@ -27,7 +27,7 @@ class Resume:
             parsed_resume = ResumeParser(temp_pdf.name).get_extracted_data()
             self.degree_type = parsed_resume.get("degree", "")
             self.university = parsed_resume.get("college_name", "")
-            self.skills = parsed_resume.get("skills", [])
+            self.skills = set(parsed_resume.get("skills", []))
         # NOTE: We only parse these three things since that's all that the
         # resume parser returns lol. We can add more later if we want.
         # Update the database
