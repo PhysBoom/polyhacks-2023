@@ -92,9 +92,10 @@ function Dashboard() {
                             <div className="flex flex-col space-y-6">
                                 <h2>Postings</h2>
                                 <div className="flex flex-col rounded-md border border-black divide-gray-300 divide-y">
-                                    {Object.entries(user.job_postings).map(([job_id, job]) => (
+                                    {user.job_postings &&Object.entries(user.job_postings).map(([job_id, job]) => (
                                         <EmployerPosting key={job_id} job={job} />
                                     ))}
+                                    {!user.job_postings && <p className="text-center p-6">No postings yet.</p>}
                                 </div>
                             </div>
                         </div>

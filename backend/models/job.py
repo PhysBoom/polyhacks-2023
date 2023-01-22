@@ -36,12 +36,13 @@ class Job(BaseModel):
     def find_next_applicant(self) -> Applicant:
         # 1. Get all the applicants
         applicants = ApplicantLoader.get_instance().get_all_applicants()
+        all_relevant_resumes = ApplicantLoader.get_instance().get_all_resumes()
         job_fitness_scale = max(0.3, 1 - len(self.resume_selection_history) * 0.05)
         resume_fitnesses = {}
         for applicant in applicants:
             if applicant.resume.id in self.resume_selection_history:
                 continue
-            resume_applicant_fitness = self._resume_applicant_fitness(applicant.resume) or 0
+            resume_applicant_fitness = self._resume_applicant_fitness(applicant.resume, all_relevant_resumes) or 0
             resume_job_fitness = self._resume_job_fitness(applicant.resume)
             resume_fitnesses[applicant.firebase_user_key] = (
                 job_fitness_scale * resume_job_fitness
@@ -82,9 +83,7 @@ class Job(BaseModel):
 
         return 0.5 * prev_job_similarity + 0.5 * skill_match_rate
 
-    def _resume_applicant_fitness(self, resume: Resume) -> Union[float, None]:
-
-        all_relevant_resumes = ApplicantLoader.get_instance().get_all_resumes()
+    def _resume_applicant_fitness(self, resume: Resume, all_relevant_resumes) -> Union[float, None]:
 
         total_fitness = 0
         for resume_id in self.resume_selection_history:
