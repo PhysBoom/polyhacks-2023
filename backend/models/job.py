@@ -35,14 +35,22 @@ class Job(BaseModel):
 
     def find_next_applicant(self) -> Applicant:
         # 1. Get all the applicants
-        applicants = ApplicantLoader.get_instance().get_all_applicants()
-        all_relevant_resumes = ApplicantLoader.get_instance().get_all_resumes()
+        loader = ApplicantLoader.get_instance()
+        applicants = loader.get_all_applicants()
+        """
+        # Pick 25 random applicants from the pool
+        applicants = random.sample(applicants, min(5, len(applicants)))
+        all_relevant_resumes = {
+            applicant.resume.id: applicant.resume
+            for applicant in applicants
+        }
+        all_resumes = loader.get_all_resumes()
         job_fitness_scale = max(0.3, 1 - len(self.resume_selection_history) * 0.05)
         resume_fitnesses = {}
         for applicant in applicants:
             if applicant.resume.id in self.resume_selection_history:
                 continue
-            resume_applicant_fitness = self._resume_applicant_fitness(applicant.resume, all_relevant_resumes) or 0
+            resume_applicant_fitness = self._resume_applicant_fitness(applicant.resume, all_resumes) or 0
             resume_job_fitness = self._resume_job_fitness(applicant.resume)
             resume_fitnesses[applicant.firebase_user_key] = (
                 job_fitness_scale * resume_job_fitness
@@ -52,20 +60,14 @@ class Job(BaseModel):
         if not resume_fitnesses:
             return None
         
-        if random.random() < min(0.8, 0.1 + len(self.resume_selection_history) * 0.05):
-            # Return the best applicant
-            key = max(resume_fitnesses, key=resume_fitnesses.get)
-            for applicant in applicants:
-                if applicant.firebase_user_key == key:
-                    return applicant
-
-        # Select applicant by random weighted choice
-        key = random.choices(
-            list(resume_fitnesses.keys()), weights=[elem if elem > 0 else 0.01 for elem in resume_fitnesses.values()]
-        )[0]
+        key = max(resume_fitnesses, key=resume_fitnesses.get)
         for applicant in applicants:
             if applicant.firebase_user_key == key:
                 return applicant
+        """
+        # Return a random applicant
+        return random.choice(applicants)
+
 
     def rate_resume(self, resume_id: str, rating: int):
         self.resume_selection_history[resume_id] = rating
@@ -86,7 +88,7 @@ class Job(BaseModel):
     def _resume_applicant_fitness(self, resume: Resume, all_relevant_resumes) -> Union[float, None]:
 
         total_fitness = 0
-        for resume_id in self.resume_selection_history:
+        for resume_id in list(self.resume_selection_history.keys())[min(1, len(self.resume_selection_history)):]:
             resume_comp = self._compare_resumes(resume, all_relevant_resumes[resume_id])
             total_fitness += resume_comp * self.resume_selection_history[resume_id]
 
