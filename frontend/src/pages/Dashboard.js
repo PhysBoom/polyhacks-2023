@@ -12,13 +12,16 @@ function EmployerPosting(props) {
         "undecided": 0,
         "likely": 0,
     }
-    for (const [key, value] of Object.entries(props.job.resume_selection_history)) {
-        if (value === -1) {
-            numOfEachLikelihoodCategory["unlikely"] += 1;
-        } else if (value === 0) {
-            numOfEachLikelihoodCategory["undecided"] += 1;
-        } else if (value === 1) {
-            numOfEachLikelihoodCategory["likely"] += 1;
+    
+    if (props.job.resume_selection_history) {
+        for (const [key, value] of Object.entries(props.job.resume_selection_history)) {
+            if (value === -1) {
+                numOfEachLikelihoodCategory["unlikely"] += 1;
+            } else if (value === 0) {
+                numOfEachLikelihoodCategory["undecided"] += 1;
+            } else if (value === 1) {
+                numOfEachLikelihoodCategory["likely"] += 1;
+            }
         }
     }
 
@@ -26,7 +29,7 @@ function EmployerPosting(props) {
         <div className="flex flex-row w-full justify-between py-6 px-8 items-center">
             <div className="flex flex-col w-1/4">
                 <p className="font-semibold">{props.job.title}</p>
-                <a href={`/employer/posting/${props.job.id}`} className="text-blue-300 hover:cursor-pointer underline">View this posting.</a>
+                <a href={`/employer/view-posting/${props.job.id}`} className="text-blue-300 hover:cursor-pointer underline">View this posting.</a>
             </div>
             <div className="flex flex-col w-1/4">
                 <p className="font-semibold">Status</p>

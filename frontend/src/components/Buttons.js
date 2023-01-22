@@ -14,7 +14,7 @@ export function ButtonPrimary(props) {
 export function ButtonSecondary(props) {
     return (
         <button
-            className="bg-quaternary text-white text-center h-[40px] w-[140px] rounded-full font-serif"
+            className="bg-quaternary text-white text-center h-[40px] w-[140px] rounded-full font-serif hover:-translate-y-1 transition-all duration-200"
             {...props}
         >
             {props.children}

@@ -1,4 +1,5 @@
 from flask import Flask, request
+from controllers.applicant_loader import ApplicantLoader
 from controllers.mongodb_client import Database
 from dotenv import load_dotenv
 from flask_cors import CORS
@@ -14,6 +15,7 @@ CORS(app)
 def initialize_app():
     load_dotenv()
     Database.initialize()
+    ApplicantLoader.get_instance()
 
 
 if __name__ == "__main__":
