@@ -25,3 +25,13 @@ def get_user_id_from_firebase_token(token):
 
 def login_user(email, password):
     return auth.sign_in_with_email_and_password(email, password)
+
+# Uploads a file to Firebase Storage
+def upload_file_to_firebase_storage(file, file_name):
+    storage = firebase.storage()
+    storage.child(file_name).put(file)
+
+# Downloads a file from Firebase Storage
+def download_file_from_firebase_storage(target_path, destination_path):
+    storage = firebase.storage()
+    storage.child(target_path).download(destination_path)

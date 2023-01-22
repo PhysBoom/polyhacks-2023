@@ -11,25 +11,33 @@ class UserTypes(Enum):
 class User(BaseModel):
     firebase_user_key: str = Field(...)
     user_type: UserTypes = Field(default=UserTypes.UNVERIFIED)
+    name: str = Field(default="")
+    email: str = Field(default="")
+    phone_number: str = Field(default="")
 
-    Config = {
-        "allow_population_by_field_name": True,
-        "use_enum_values": True
-    }
+    class Config:
+        allow_population_by_field_name: True
+        use_enum_values: True
+        arbitrary_types_allowed: True
+
+    def as_dict(self):
+        dict_without_enums = self.dict()
+        dict_without_enums["user_type"] = self.user_type.value
+        return dict_without_enums
 
     def load_user_from_db(self):
-        return User(**Database.find_one("users", {"firebase_user_key": self.firebase_user_key}))
+        return Database.find_one("users", {"firebase_user_key": self.firebase_user_key})
 
     @staticmethod
     def get_user_with_firebase_token(token):
         return Database.find_one("users", {"firebase_user_key": get_user_id_from_firebase_token(token)})
 
     @staticmethod
-    def register(email, password):
+    def register(email, password, name, phone_number, type: UserTypes):
         try:
             firebase_user_key = create_new_user(email, password)['localId']
-            user = User(firebase_user_key=firebase_user_key)
-            Database.insert_one("users", user.dict())
+            user = User(firebase_user_key=firebase_user_key, user_type=type, email=email, name=name, phone_number=phone_number)
+            Database.insert_one("users", user.as_dict())
             return True
         except Exception as e:
             print(e)

@@ -1,4 +1,5 @@
 from flask import Flask, Blueprint, request, jsonify
+from models.user import UserTypes
 from models.user import User
 from functools import wraps
 
@@ -27,9 +28,9 @@ def register():
     Register a new user
     """
     data = request.get_json()
-    res = User.register(data["email"], data["password"])  # type: ignore
+    res = User.register(data["email"], data["password"], data['name'], data['phone_number'], UserTypes(data["type"]))
     return (
-        jsonify({"message": "User created successfully!"}), 201
+        (jsonify({"message": "User created successfully!"}), 201)
         if res
         else (jsonify({"message": "Username or email already exists"}), 400)
     )
@@ -43,7 +44,7 @@ def login():
     data = request.get_json()
     login_data = User.login(data["email"], data["password"])  # type: ignore
     return (
-        jsonify({"token": login_data}), 200
+        (jsonify({"token": login_data}), 200)
         if login_data is not None
         else (jsonify({"message": "Invalid username or password"}), 401)
     )

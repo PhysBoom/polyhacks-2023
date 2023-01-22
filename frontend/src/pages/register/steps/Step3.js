@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {toast} from "react-hot-toast"
 
-function Step2(props) {
+function Step3(props) {
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState(undefined);
     const [password, setPassword] = useState(undefined);
@@ -22,7 +22,7 @@ function Step2(props) {
                 data: {
                     email,
                     password,
-                    type: "applicant",
+                    type: "employer",
                     name,
                     phone_number: phone
                 }
@@ -38,12 +38,12 @@ function Step2(props) {
     return (
         <div className="flex flex-row w-full px-10 max-w-[1200px] justify-between space-x-20">
             <div className="flex flex-col w-1/2 space-y-6">
-                <h1>I'm Looking for Work.</h1>
+                <h1>I'm Looking to Hire.</h1>
                 <p>Lorem ipsum dolor sit amet consectetur. Malesuada penatibus vulputate dictumst non. Porta cras sodales quis tellus commodo sit aliquet orci quisque. Porttitor morbi diam mattis at etiam et semper id morbi. Elit suscipit id porttitor pellentesque vel posuere vel mollis. </p>
             </div>
             <div className="flex flex-col w-1/2 space-y-6 text-center">
                 <h1>Create an account</h1>
-                <small>Finding jobs has never been easier</small>
+                <small>Finding employees has never been easier</small>
                 <TextInput placeholder="Email Address" onChange={(val) => setEmail(val)} />
                 <TextInput type="password" placeholder="Password" onChange={(val) => setPassword(val)} />
                 <TextInput placeholder="Full Name" onChange={(val) => setName(val)} />
@@ -55,4 +55,4 @@ function Step2(props) {
     )
 }
 
-export default Step2;
+export default Step3;
