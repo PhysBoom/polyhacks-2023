@@ -7,3 +7,8 @@ class Bio(BaseModel):
     age: int = Field(...)
     gender: Gender = Field(...)
     contact_info: ContactInfo = Field(...)
+
+    Config = {
+        "allow_population_by_field_name": True,
+        "use_enum_values": True
+    }
