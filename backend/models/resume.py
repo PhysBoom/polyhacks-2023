@@ -9,5 +9,5 @@ class Resume:
     university: str = Field(...)
     gpa: float = Field(...)
     grad_date: int = Field(default=-1) # UNIX timestamp to the nearest day, -1 = not graduated yet
-    skills: List[str] = Field(default_factory=list)
+    skills: Set[str] = Field(default_factory=list)
     employment_history: List[PreviousJob] = Field(default_factory=list)
