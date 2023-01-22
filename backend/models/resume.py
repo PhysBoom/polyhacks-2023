@@ -32,6 +32,14 @@ class Resume(BaseModel):
         f.close()
         os.unlink(f.name)
         return contents
+
+    def update(self, data):
+        # TODO: Make more secure
+        self.employment_history = [PreviousJob(**job) for job in data['employment_history']]
+        for key, value in data.items():
+            if key not in ['employment_history', 'id']:
+                setattr(self, key, value)
+        return self
     
     @staticmethod
     def get_resume_by_id(resume_id):
