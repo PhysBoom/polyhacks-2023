@@ -33,13 +33,23 @@ class Job(BaseModel):
 
     def compare_resumes(self, resume1: Resume, resume2: Resume) -> float:
         # semantic similarity of degree
-        degree_similarity = self.semantic_similarity(resume1.degree_type, resume2.degree_type)
+        if resume1.degree_type is None and resume2.degree_type is None:
+            degree_similarity = 1
+        elif resume1.degree_type is None or resume2.degree_type is None:
+            degree_similarity = 0
+        else:
+            degree_similarity = self.semantic_similarity(resume1.degree_type, resume2.degree_type)
         
         # semanatic sim of previous job titles
         experience_similarity = median(self.semantic_similarity(job1.job_title, job2.job_title) for job1 in resume1.employment_history for job2 in resume2.employment_history)
 
         # diff of gpa
-        gpa_similarity = 1 - (resume1.gpa - resume2.gpa) / 5
+        if resume1.gpa is None and resume2.gpa is None:
+            gpa_similarity = 1
+        elif resume1.ga is None or resume2.gpa is None:
+            gpa_similarity = 0
+        else:
+            gpa_similarity = 1 - (resume1.gpa - resume2.gpa) / 5
 
         # diff of grad date (NOT DOING)
 
