@@ -7,19 +7,17 @@ from .bio import Bio
 from .user import User, UserTypes
 
 class Applicant(User):
-    name: str = Field(...)
     bio: Bio = Field(...) # TODO: Implement bio
     resume: Resume = Field(...) # TODO: Implement resume
 
-    Config = {
-        "allow_population_by_field_name": True,
-        "use_enum_values": True
-    }
+    class Config:
+        allow_population_by_field_name: True
+        use_enum_values: True
 
     # init w/ applicant type
     def __init__(self, **data):
+        data["user_type"] = UserTypes.APPLICANT
         super().__init__(**data)
-        self.user_type = UserTypes.APPLICANT
 
     def upload_resume(self, resume: str): # resume is a URL to the PDF
         r = Resume(pdf=resume)

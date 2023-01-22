@@ -10,3 +10,14 @@ export function ButtonPrimary(props) {
     </button>
   );
 }
+
+export function ButtonSecondary(props) {
+    return (
+        <button
+            className="bg-quaternary text-white text-center h-[40px] w-[140px] rounded-full font-serif"
+            {...props}
+        >
+            {props.children}
+        </button>
+    )
+}
