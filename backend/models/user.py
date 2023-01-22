@@ -18,6 +18,7 @@ class User(BaseModel):
     class Config:
         allow_population_by_field_name: True
         use_enum_values: True
+        arbitrary_types_allowed: True
 
     def as_dict(self):
         dict_without_enums = self.dict()
@@ -25,7 +26,7 @@ class User(BaseModel):
         return dict_without_enums
 
     def load_user_from_db(self):
-        return User(**Database.find_one("users", {"firebase_user_key": self.firebase_user_key}))
+        return Database.find_one("users", {"firebase_user_key": self.firebase_user_key})
 
     @staticmethod
     def get_user_with_firebase_token(token):

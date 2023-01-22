@@ -6,6 +6,10 @@ h1 {
   @apply text-h1 font-bold font-serif;
 }
 
+h2 {
+  @apply text-h2 font-bold font-serif;
+}
+
 p {
   @apply text-body font-normal font-serif;
 }

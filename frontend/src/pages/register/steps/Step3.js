@@ -27,7 +27,7 @@ function Step3(props) {
                     phone_number: phone
                 }
             })
-            navigate("/dashboard");
+            navigate("/login");
         } catch (err) {
             console.error(err);
             toast.error(err.response.data.message);

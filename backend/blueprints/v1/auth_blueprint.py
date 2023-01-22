@@ -44,7 +44,7 @@ def login():
     data = request.get_json()
     login_data = User.login(data["email"], data["password"])  # type: ignore
     return (
-        jsonify({"token": login_data}), 200
+        (jsonify({"token": login_data}), 200)
         if login_data is not None
         else (jsonify({"message": "Invalid username or password"}), 401)
     )
