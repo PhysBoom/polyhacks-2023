@@ -50,4 +50,5 @@ class Resume(BaseModel):
 
     @staticmethod
     def get_resume_by_id(resume_id):
-        return Resume(**Database.find_one("resumes", {"id": resume_id}))
+        # TODO: Make this better obvs (referencing)
+        return Resume(**Database.find_one("users", {"resume.id": resume_id})["resume"])

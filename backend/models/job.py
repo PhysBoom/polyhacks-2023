@@ -1,15 +1,19 @@
 import random
 from typing import Dict, Union
 from typing import Set
+from uuid import uuid4
 from pydantic import BaseModel, Field
 from models.applicant import Applicant
 from sentence_transformers import SentenceTransformer, util
 from statistics import median
+from controllers.mongodb_client import Database
 
 from .resume import Resume
 
 
 class Job(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid4()))
+    employer_id: str = Field(...)
     title: str = Field(...)
     description: str = Field(default="")
     salary: int = Field(...)
@@ -122,3 +126,4 @@ class Job(BaseModel):
         embedding2 = self.model.encode(s2, convert_to_tensor=True)
         cos_scores = util.pytorch_cos_sim(embedding1, embedding2)
         return cos_scores.item()
+        

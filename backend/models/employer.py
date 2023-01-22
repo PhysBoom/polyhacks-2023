@@ -7,7 +7,7 @@ from controllers.firebase_controller import upload_file_to_firebase_storage
 
 
 class Employer(User):
-    job_postings: list = Field(default_factory=list)
+    job_postings: dict = Field(default={}) # {job_id: job}
 
     class Config:
         allow_population_by_field_name: True
@@ -15,12 +15,15 @@ class Employer(User):
         arbitrary_types_allowed: True
 
     def create_posting(self, job):
-        self.job_postings.append(job)
+        # TODO: Probably use referencing but for now just store the job
+        self.job_postings[job.id] = job
         Database.update_one(
             "users",
             {"firebase_user_key": self.firebase_user_key},
             {"$set": self.as_dict()},
         )
+
+    
 
     # init w/ applicant type
     def __init__(self, **data):

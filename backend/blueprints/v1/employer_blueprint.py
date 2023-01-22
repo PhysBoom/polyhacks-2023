@@ -18,6 +18,7 @@ def create_posting(user):
     """
     data = request.get_json()
     user = Employer(**user)
+    data['employer_id'] = user.firebase_user_key
     data['desired_skills'] = [skill.lower() for skill in data['desired_skills']]
     user.create_posting(Job(**data))
     return jsonify({"message": "Posting created successfully!"}), 200
