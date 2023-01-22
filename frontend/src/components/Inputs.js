@@ -15,6 +15,17 @@ export function TextInput(props) {
     }
 
     return (
-        <input className="border border-black border-2 rounded-sm p-3 text-black placeholder-black" type={props.type} value={props.value} onChange={handleChange} placeholder={props.placeholder}/>
+        <input className="border border-black border-2 rounded-sm p-3 text-black" type={props.type} value={props.value} onChange={handleChange} placeholder={props.placeholder}/>
+    );
+}
+
+export function TextArea(props) {
+    function handleChange(e) {
+        e.preventDefault();
+        props.onChange(e.target.value);
+    }
+
+    return (
+        <textarea className="border border-black border-2 rounded-sm p-3 text-black" value={props.value} onChange={handleChange} placeholder={props.placeholder}/>
     );
 }

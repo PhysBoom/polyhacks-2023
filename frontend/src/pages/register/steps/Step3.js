@@ -44,10 +44,10 @@ function Step3(props) {
             <div className="flex flex-col w-1/2 space-y-6 text-center">
                 <h1>Create an account</h1>
                 <small>Finding employees has never been easier</small>
-                <TextInput placeholder="Email Address" onChange={(val) => setEmail(val)} />
-                <TextInput type="password" placeholder="Password" onChange={(val) => setPassword(val)} />
-                <TextInput placeholder="Full Name" onChange={(val) => setName(val)} />
-                <TextInput placeholder="Phone Number" onChange={(val) => setPhone(val)} />
+                <TextInput placeholder="Email Address" onChange={(val) => setEmail(val)} value={email} />
+                <TextInput type="password" placeholder="Password" onChange={(val) => setPassword(val)} value={password} />
+                <TextInput placeholder="Full Name" onChange={(val) => setName(val)} value={name} />
+                <TextInput placeholder="Phone Number" onChange={(val) => setPhone(val)} value={phone} />
                 <ButtonSecondary style={{width: "100%", borderRadius: "5px", height: "45px"}} onClick={handleRegister}>{loading ? "Loading..." : "Create Account"}</ButtonSecondary>
                 <small className="underline cursor-pointer" onClick={() => navigate("/login")}>Already have an account?</small>
             </div>

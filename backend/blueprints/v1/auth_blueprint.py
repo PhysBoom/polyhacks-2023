@@ -28,7 +28,13 @@ def register():
     Register a new user
     """
     data = request.get_json()
-    res = User.register(data["email"], data["password"], data['name'], data['phone_number'], UserTypes(data["type"]))
+    res = User.register(
+        data["email"],
+        data["password"],
+        data["name"],
+        data["phone_number"],
+        UserTypes(data["type"]),
+    )
     return (
         (jsonify({"message": "User created successfully!"}), 201)
         if res
@@ -48,3 +54,13 @@ def login():
         if login_data is not None
         else (jsonify({"message": "Invalid username or password"}), 401)
     )
+
+
+@auth_blueprint.route("/user", methods=["GET"])
+@token_required
+def get_user(user):
+    """
+    Get user
+    """
+    user["_id"] = str(user["_id"])
+    return jsonify(user), 200

@@ -48,7 +48,6 @@ function SubmitResume() {
                     <label className="flex flex-col bg-secondary h-[300px] items-center justify-center rounded-md" onClick={handleSubmitResume}>
                         <FileUploadIcon />
                         <p>Drag and drop file.</p>
-                        <small>PNG or JPG</small>
                         <input type="file" ref={hiddenFileInput} onChange={handleSubmitResume} style={{display: "none"}} />
                     </label>
                 </div>
